@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de données - Parcours scolaires gabonais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #c0392b;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #e74c3c;
+            font-size: 1.2rem;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #009639, #fcdd09, #e74c3c);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: #009639;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #009639, #fcdd09);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .profile-info h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .profile-summary {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #009639 0%, #fcdd09 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .modal-tabs {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #6c757d;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-tab.active {
+            background-color: white;
+            color: #009639;
+            border-bottom: 3px solid #009639;
+        }
+
+        .modal-tab:hover {
+            background-color: #e9ecef;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #dee2e6;
+        }
+
+        .map-legend {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #009639, #fcdd09, #e74c3c);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #009639;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #009639;
+        }
+
+        .timeline-date {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-school {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .timeline-location {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #5d6d7e;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #009639;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇬🇦 Parcours Scolaires Gabonais</h1>
+            <p>Base de données des étudiants et leurs établissements</p>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par nom, ID, lieu de naissance, établissement...">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <div id="profilesContainer" class="profiles-grid"></div>
+        <div id="noResults" class="no-results" style="display: none;">
+            Aucun profil trouvé pour cette recherche.
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modalName"></h2>
+                <p id="modalCurrentStatus"></p>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchTab('timeline')">📚 Parcours</button>
+                <button class="modal-tab" onclick="switchTab('map')">🗺️ Carte</button>
+            </div>
+            <div class="modal-body">
+                <div id="timelineTab" class="tab-content active">
+                    <div id="timelineContainer" class="timeline"></div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div id="totalYears" class="stat-number">0</div>
+                            <div class="stat-label">Années d'études</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="totalSchools" class="stat-number">0</div>
+                            <div class="stat-label">Établissements</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="totalCities" class="stat-number">0</div>
+                            <div class="stat-label">Villes</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mapTab" class="tab-content">
+                    <div id="map"></div>
+                    <div class="map-legend">
+                        <h4 style="margin-bottom: 15px; color: #2c3e50;">Légende des établissements</h4>
+                        <div id="legendContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./student.js"></script>
+    <script>
+        let currentMap = null;
+
+        let filteredStudents = [...students];
+
+        // Fonction pour changer d'onglet
+        function switchTab(tabName) {
+            // Désactiver tous les onglets
+            document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Activer l'onglet sélectionné
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+            
+            // Si c'est l'onglet carte et qu'il y a une carte, la redimensionner
+            if (tabName === 'map' && currentMap) {
+                setTimeout(() => {
+                    currentMap.invalidateSize();
+                }, 100);
+            }
+        }
+
+        // Fonction pour créer la carte
+        function createMap(student) {
+            // Détruire la carte existante si elle existe
+            if (currentMap) {
+                currentMap.remove();
+                currentMap = null;
+            }
+
+            // Initialiser la carte centrée sur le Gabon
+            currentMap = L.map('map').setView([0.4162, 9.4673], 7);
+
+            // Ajouter les tuiles de la carte
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(currentMap);
+
+            // Couleurs pour chaque établissement
+            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c'];
+            const legendContainer = document.getElementById('legendContainer');
+            legendContainer.innerHTML = '';
+
+            // Ajouter des marqueurs pour chaque établissement
+            student.parcours.forEach((parcour, index) => {
+                const coords = cityCoordinates[parcour.ville];
+                if (coords) {
+                    const color = colors[index % colors.length];
+                    
+                    // Créer un marqueur coloré
+                    const marker = L.circleMarker([coords.lat, coords.lng], {
+                        color: 'white',
+                        fillColor: color,
+                        fillOpacity: 0.8,
+                        radius: 12,
+                        weight: 3
+                    }).addTo(currentMap);
+
+                    // Ajouter une popup avec les informations
+                    marker.bindPopup(`
+                        <div style="text-align: center; min-width: 200px;">
+                            <h4 style="color: ${color}; margin-bottom: 8px;">${parcour.etablissement}</h4>
+                            <p style="margin: 5px 0;"><strong>📍 ${parcour.ville}</strong></p>
+                            <p style="margin: 5px 0;"><strong>📅 ${parcour.periode}</strong></p>
+                            <p style="margin: 5px 0;">${parcour.niveau}</p>
+                            <p style="margin-top: 8px; font-size: 0.9em; color: #666;">${parcour.description}</p>
+                        </div>
+                    `);
+
+                    // Ajouter à la légende
+                    const legendItem = document.createElement('div');
+                    legendItem.className = 'legend-item';
+                    legendItem.innerHTML = `
+                        <div class="legend-color" style="background-color: ${color};"></div>
+                        <div>
+                            <strong>${parcour.etablissement}</strong><br>
+                            <small>${parcour.ville} • ${parcour.periode}</small>
+                        </div>
+                    `;
+                    legendContainer.appendChild(legendItem);
+                }
+            });
+
+            // Ajuster la vue pour inclure tous les marqueurs
+            const group = new L.featureGroup(currentMap._layers);
+            if (Object.keys(group._layers).length > 0) {
+                currentMap.fitBounds(group.getBounds().pad(0.1));
+            }
+        }
+
+        // Fonction pour obtenir les initiales
+        function getInitials(firstName, lastName) {
+            return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
+        }
+
+        // Fonction pour calculer les statistiques
+        function calculateStats(parcours) {
+            const totalYears = parcours.reduce((sum, item) => {
+                const years = item.periode.split('-');
+                return sum + (parseInt(years[1]) - parseInt(years[0]));
+            }, 0);
+            
+            const schools = new Set(parcours.map(item => item.etablissement));
+            const cities = new Set(parcours.map(item => item.ville));
+            
+            return {
+                totalYears,
+                totalSchools: schools.size,
+                totalCities: cities.size
+            };
+        }
+
+        // Fonction pour afficher les profils
+        function displayProfiles(studentsToShow) {
+            const container = document.getElementById('profilesContainer');
+            const noResults = document.getElementById('noResults');
+            
+            if (studentsToShow.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            container.innerHTML = studentsToShow.map(student => {
+                const stats = calculateStats(student.parcours);
+                return `
+                    <div class="profile-card" onclick="openModal(${student.id})">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                ${getInitials(student.firstName, student.lastName)}
+                            </div>
+                            <div class="profile-info">
+                                <h3>${student.firstName} ${student.lastName}</h3>
+                                <p>${student.currentStatus}</p>
+                            </div>
+                        </div>
+                        <div class="profile-summary">
+                            <div style="margin-bottom: 8px;"><strong>ID:</strong> ${student.identificationNumber}</div>
+                            <div style="margin-bottom: 8px;"><strong>Né(e) à:</strong> ${student.birthPlace}</div>
+                            <strong>${stats.totalSchools}</strong> établissement(s) • 
+                            <strong>${stats.totalCities}</strong> ville(s) • 
+                            <strong>${stats.totalYears}</strong> années d'études
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Fonction pour ouvrir le modal
+        function openModal(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if (!student) return;
+
+            const modal = document.getElementById('profileModal');
+            const stats = calculateStats(student.parcours);
+            
+            // Remplir les informations du header
+            document.getElementById('modalName').textContent = `${student.firstName} ${student.lastName}`;
+            document.getElementById('modalCurrentStatus').textContent = `${student.currentStatus} • ID: ${student.identificationNumber} • Né(e) à ${student.birthPlace}`;
+            
+            // Remplir la timeline
+            const timelineContainer = document.getElementById('timelineContainer');
+            timelineContainer.innerHTML = student.parcours.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${item.periode}</div>
+                    <div class="timeline-school">${item.etablissement}</div>
+                    <div class="timeline-location">📍 ${item.ville}</div>
+                    <div class="timeline-description">
+                        <strong>${item.niveau}</strong><br>
+                        ${item.description}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Remplir les statistiques
+            document.getElementById('totalYears').textContent = stats.totalYears;
+            document.getElementById('totalSchools').textContent = stats.totalSchools;
+            document.getElementById('totalCities').textContent = stats.totalCities;
+            
+            // Créer la carte
+            createMap(student);
+            
+            // S'assurer que l'onglet timeline est actif par défaut
+            switchTab('timeline');
+            
+            modal.style.display = 'block';
+        }
+
+        // Fonction de recherche
+        function filterStudents(searchTerm) {
+            const term = searchTerm.toLowerCase();
+            filteredStudents = students.filter(student => 
+                student.firstName.toLowerCase().includes(term) ||
+                student.lastName.toLowerCase().includes(term) ||
+                student.identificationNumber.toLowerCase().includes(term) ||
+                student.birthPlace.toLowerCase().includes(term) ||
+                student.currentStatus.toLowerCase().includes(term) ||
+                student.parcours.some(p => 
+                    p.etablissement.toLowerCase().includes(term) ||
+                    p.ville.toLowerCase().includes(term) ||
+                    p.niveau.toLowerCase().includes(term)
+                )
+            );
+            displayProfiles(filteredStudents);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            filterStudents(e.target.value);
+        });
+
+        // Fermer le modal
+        document.querySelector('.close').addEventListener('click', () => {
+            document.getElementById('profileModal').style.display = 'none';
+            if (currentMap) {
+                currentMap.remove();
+                currentMap = null;
+            }
+        });
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('profileModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                if (currentMap) {
+                    currentMap.remove();
+                    currentMap = null;
+                }
+            }
+        });
+
+        // Initialisation
+        displayProfiles(students);
+    </script>
+</body>
+</html>
