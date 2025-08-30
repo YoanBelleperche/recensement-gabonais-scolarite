@@ -9,316 +9,710 @@ const cityCoordinates = {
     "Lambaréné": { lat: -0.7002, lng: 10.2410 },
     "Bitam": { lat: 2.0776, lng: 11.4963 },
     "Mouila": { lat: -1.8633, lng: 11.0567 },
-    "Tchibanga": { lat: -2.8500, lng: 11.0167 }
+    "Tchibanga": { lat: -2.8500, lng: 11.0167 },
+
+    // France
+    "Paris": { lat: 48.8566, lng: 2.3522 },
+    "Lyon": { lat: 45.7640, lng: 4.8357 },
+    "Marseille": { lat: 43.2965, lng: 5.3698 },
+    "Toulouse": { lat: 43.6047, lng: 1.4442 },
+    "Bordeaux": { lat: 44.8378, lng: -0.5792 },
+    "Lille": { lat: 50.6292, lng: 3.0573 },
+
+    // Europe
+    "London": { lat: 51.5074, lng: -0.1278 },
+    "Berlin": { lat: 52.5200, lng: 13.4050 },
+    "Madrid": { lat: 40.4168, lng: -3.7038 },
+    "Rome": { lat: 41.9028, lng: 12.4964 },
+    "Amsterdam": { lat: 52.3676, lng: 4.9041 },
+    "Brussels": { lat: 50.8503, lng: 4.3517 },
+    "Vienna": { lat: 48.2100, lng: 16.3738 },
+    "Zurich": { lat: 47.3769, lng: 8.5417 },
+    "Warsaw": { lat: 52.2297, lng: 21.0122 },
+    "Prague": { lat: 50.0755, lng: 14.4378 },
+
+    // États-Unis
+    "New York": { lat: 40.7128, lng: -74.0060 },
+    "Los Angeles": { lat: 34.0522, lng: -118.2437 },
+    "Chicago": { lat: 41.8781, lng: -87.6298 },
+    "Houston": { lat: 29.7604, lng: -95.3698 },
+    "Miami": { lat: 25.7617, lng: -80.1918 },
+    "San Francisco": { lat: 37.7749, lng: -122.4194 },
+    "Washington D.C.": { lat: 38.9072, lng: -77.0369 },
+    "Boston": { lat: 42.3601, lng: -71.0589 },
+
+    // Canada
+    "Montréal": { lat: 45.5017, lng: -73.5673 },
+
+    // Asie
+    "Tokyo": { lat: 35.6895, lng: 139.6917 },
+    "Beijing": { lat: 39.9042, lng: 116.4074 },
+    "Seoul": { lat: 37.5665, lng: 126.9780 },
+    "Shanghai": { lat: 31.2304, lng: 121.4737 },
+    "Singapore": { lat: 1.3521, lng: 103.8198 },
+    "Bangkok": { lat: 13.7563, lng: 100.5018 },
+    "New Delhi": { lat: 28.6139, lng: 77.2090 },
+
+    // Afrique
+    "Casablanca": { lat: 33.5731, lng: -7.5898 },
+    "Rabat": { lat: 34.0209, lng: -6.8416 },
+    "Marrakech": { lat: 31.6295, lng: -7.9811 },
+    "Dakar": { lat: 14.7167, lng: -17.4677 },
+    "Abidjan": { lat: 5.3599, lng: -4.0083 },
+    "Accra": { lat: 5.6037, lng: -0.1870 },
+    "Lagos": { lat: 6.5244, lng: 3.3792 },
+    "Kinshasa": { lat: -4.4419, lng: 15.2663 },
+    "Nairobi": { lat: -1.2921, lng: 36.8219 },
+    "Addis Ababa": { lat: 9.1450, lng: 40.4897 },
+    "Johannesburg": { lat: -26.2041, lng: 28.0473 },
+    "Cape Town": { lat: -33.9249, lng: 18.4241 },
+    "Algiers": { lat: 36.7538, lng: 3.0588 },
+    "Tunis": { lat: 36.8065, lng: 10.1815 },
+    "Cairo": { lat: 30.0444, lng: 31.2357 }
 };
 
-// Base de données des étudiants gaonais
-
+// Base de données des étudiants gabonais
 const students = [
     {
         id: 1,
-        identificationNumber: "GA240115001",
+        identificationNumber: "GA190885001",
         firstName: "Jean-Baptiste",
         lastName: "NZOGHE",
-        birthPlace: "Libreville, Estuaire",
-        currentStatus: "Étudiant en Master",
+        birthPlace: "Franceville, Haut-Ogooué",
+        currentStatus: "Mécanicien automobile",
         parcours: [
             {
-                periode: "2018-2023",
-                etablissement: "Université Omar Bongo",
-                ville: "Libreville",
-                niveau: "Licence en Informatique",
-                description: "Formation en développement logiciel et bases de données"
+                periode: "2018-présent",
+                etablissement: "Garage Total Franceville",
+                ville: "Franceville",
+                niveau: "Mécanicien chef d'équipe",
+                description: "Réparation et maintenance véhicules légers et poids lourds"
             },
             {
                 periode: "2015-2018",
-                etablissement: "Lycée Léon Mba",
-                ville: "Libreville",
-                niveau: "Baccalauréat Série C",
-                description: "Spécialisation mathématiques et sciences physiques"
+                etablissement: "Atelier Mécanique Moderne",
+                ville: "Franceville",
+                niveau: "Mécanicien",
+                description: "Diagnostic et réparation moteurs essence et diesel"
             },
             {
-                periode: "2012-2015",
-                etablissement: "Collège Sainte-Marie",
-                ville: "Port-Gentil",
+                periode: "2013-2015",
+                etablissement: "Centre de Formation Professionnelle",
+                ville: "Franceville",
+                niveau: "CAP Mécanique Auto",
+                description: "Formation technique en mécanique automobile"
+            },
+            {
+                periode: "2009-2013",
+                etablissement: "Lycée Technique de Franceville",
+                ville: "Franceville",
+                niveau: "Baccalauréat Technique F1",
+                description: "Construction mécanique et électrotechnique"
+            },
+            {
+                periode: "2005-2009",
+                etablissement: "Collège Charles Lwanga",
+                ville: "Franceville",
                 niveau: "Collège",
-                description: "Formation générale avec mention très bien"
+                description: "Formation générale orientation scientifique"
+            },
+            {
+                periode: "1999-2005",
+                etablissement: "École Primaire Sainte-Marie",
+                ville: "Franceville",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention assez bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital de Franceville",
+                ville: "Franceville",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Franceville, Province du Haut-Ogooué"
             }
         ]
     },
     {
         id: 2,
-        identificationNumber: "GA240315002",
+        identificationNumber: "GA280492002",
         firstName: "Marie-Claire",
-        lastName: "OBAME",
+        lastName: "OBIANG",
         birthPlace: "Port-Gentil, Ogooué-Maritime",
-        currentStatus: "Professeure d'anglais",
+        currentStatus: "Infirmière coordinatrice",
         parcours: [
             {
-                periode: "2020-2022",
-                etablissement: "École Normale Supérieure",
-                ville: "Libreville",
-                niveau: "Master en Didactique",
-                description: "Spécialisation en enseignement de l'anglais"
+                periode: "2022-présent",
+                etablissement: "Hôpital Européen Georges Pompidou",
+                ville: "Paris",
+                niveau: "Infirmière coordinatrice service cardiologie",
+                description: "Coordination équipes soignantes et protocoles thérapeutiques"
             },
             {
-                periode: "2016-2020",
-                etablissement: "Université Omar Bongo",
-                ville: "Libreville",
-                niveau: "Licence LLCE Anglais",
-                description: "Langues, littératures et civilisations étrangères"
+                periode: "2019-2022",
+                etablissement: "Hôpital Saint-Louis",
+                ville: "Paris",
+                niveau: "Infirmière diplômée d'État",
+                description: "Soins infirmiers en service médecine interne"
             },
             {
-                periode: "2013-2016",
-                etablissement: "Lycée National Léon Mba",
+                periode: "2018-2019",
+                etablissement: "Préfecture de Paris",
+                ville: "Paris",
+                niveau: "Équivalence diplôme",
+                description: "Reconnaissance diplôme gabonais et stage d'adaptation"
+            },
+            {
+                periode: "2014-2018",
+                etablissement: "Institut National des Sciences de la Santé",
                 ville: "Libreville",
-                niveau: "Baccalauréat Série A",
-                description: "Littéraire avec option anglais renforcé"
+                niveau: "Diplôme d'État Infirmier",
+                description: "Formation théorique et stages pratiques hospitaliers"
+            },
+            {
+                periode: "2011-2014",
+                etablissement: "Lycée Léon Mba",
+                ville: "Libreville",
+                niveau: "Baccalauréat Série D",
+                description: "Sciences de la vie et de la terre mention bien"
+            },
+            {
+                periode: "2007-2011",
+                etablissement: "Collège Bessieux",
+                ville: "Port-Gentil",
+                niveau: "Collège",
+                description: "Formation générale avec option biologie"
+            },
+            {
+                periode: "2001-2007",
+                etablissement: "École Primaire Port-Gentil Centre",
+                ville: "Port-Gentil",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention très bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Clinique Mandji",
+                ville: "Port-Gentil",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Port-Gentil, Province de l'Ogooué-Maritime"
             }
         ]
     },
     {
         id: 3,
-        identificationNumber: "GA240712003",
-        firstName: "Paul",
-        lastName: "MOUGANDA",
-        birthPlace: "Franceville, Haut-Ogooué",
-        currentStatus: "Ingénieur pétrolier",
+        identificationNumber: "GA051087003",
+        firstName: "Patrick",
+        lastName: "MBOUMBA",
+        birthPlace: "Libreville, Estuaire",
+        currentStatus: "Ingénieur logiciel",
         parcours: [
             {
-                periode: "2019-2022",
-                etablissement: "Institut Africain d'Informatique",
+                periode: "2020-présent",
+                etablissement: "Sony Interactive Entertainment",
+                ville: "Tokyo",
+                niveau: "Senior Software Engineer",
+                description: "Développement systèmes gaming et optimisation performance"
+            },
+            {
+                periode: "2018-2020",
+                etablissement: "Rakuten Inc.",
+                ville: "Tokyo",
+                niveau: "Software Developer",
+                description: "Développement applications e-commerce et APIs"
+            },
+            {
+                periode: "2017-2018",
+                etablissement: "École de langue japonaise Naganuma",
+                ville: "Tokyo",
+                niveau: "Certification JLPT N2",
+                description: "Apprentissage intensif langue japonaise"
+            },
+            {
+                periode: "2012-2017",
+                etablissement: "École Supérieure d'Informatique ESIG",
                 ville: "Libreville",
-                niveau: "Master en Génie Pétrolier",
-                description: "Spécialisation en exploration et production"
+                niveau: "Master Génie Logiciel",
+                description: "Spécialisation développement et architecture logicielle"
             },
             {
-                periode: "2015-2019",
-                etablissement: "École Polytechnique de Masuku",
-                ville: "Franceville",
-                niveau: "Ingénieur Généraliste",
-                description: "Formation pluridisciplinaire en sciences de l'ingénieur"
+                periode: "2009-2012",
+                etablissement: "École Supérieure d'Informatique ESIG",
+                ville: "Libreville",
+                niveau: "Licence Informatique",
+                description: "Programmation, bases de données, réseaux informatiques"
             },
             {
-                periode: "2012-2015",
-                etablissement: "Lycée Technique Omar Bongo",
-                ville: "Franceville",
-                niveau: "Baccalauréat Série D",
-                description: "Sciences et techniques industrielles"
+                periode: "2006-2009",
+                etablissement: "Lycée National Léon Mba",
+                ville: "Libreville",
+                niveau: "Baccalauréat Série C",
+                description: "Mathématiques et sciences physiques mention bien"
+            },
+            {
+                periode: "2002-2006",
+                etablissement: "Collège Sainte-Marie",
+                ville: "Libreville",
+                niveau: "Collège",
+                description: "Formation générale avec excellence en mathématiques"
+            },
+            {
+                periode: "1996-2002",
+                etablissement: "École Primaire Plaine-Orety",
+                ville: "Libreville",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention excellent"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Central de Libreville",
+                ville: "Libreville",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Libreville, Province de l'Estuaire"
             }
         ]
     },
     {
         id: 4,
-        identificationNumber: "GA240520004",
-        firstName: "Sandrine",
-        lastName: "MOUSSOUNDA",
-        birthPlace: "Oyem, Woleu-Ntem",
-        currentStatus: "Médecin généraliste",
+        identificationNumber: "GA150694004",
+        firstName: "Nadège",
+        lastName: "ONDO",
+        birthPlace: "Bitam, Woleu-Ntem",
+        currentStatus: "Vendeuse en boutique",
         parcours: [
             {
-                periode: "2021-2024",
-                etablissement: "CHU de Libreville",
-                ville: "Libreville",
-                niveau: "Internat en Médecine",
-                description: "Spécialisation en médecine générale"
+                periode: "2019-présent",
+                etablissement: "Boutique Élégance",
+                ville: "Bitam",
+                niveau: "Vendeuse responsable",
+                description: "Vente prêt-à-porter féminin et conseil clientèle"
             },
             {
-                periode: "2014-2021",
-                etablissement: "Faculté de Médecine UOB",
-                ville: "Libreville",
-                niveau: "Doctorat en Médecine",
-                description: "Formation médicale complète avec stages hospitaliers"
+                periode: "2016-2019",
+                etablissement: "Marché Central de Bitam",
+                ville: "Bitam",
+                niveau: "Commerçante indépendante",
+                description: "Commerce produits cosmétiques et accessoires"
             },
             {
-                periode: "2011-2014",
-                etablissement: "Lycée Immaculée Conception",
-                ville: "Libreville",
-                niveau: "Baccalauréat Série D",
-                description: "Sciences de la vie et de la terre"
+                periode: "2012-2016",
+                etablissement: "Lycée de Bitam",
+                ville: "Bitam",
+                niveau: "Baccalauréat Série A4",
+                description: "Lettres et sciences humaines"
+            },
+            {
+                periode: "2008-2012",
+                etablissement: "Collège de Bitam",
+                ville: "Bitam",
+                niveau: "Collège",
+                description: "Formation générale littéraire"
+            },
+            {
+                periode: "2002-2008",
+                etablissement: "École Primaire Publique de Bitam",
+                ville: "Bitam",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention passable"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Dispensaire de Bitam",
+                ville: "Bitam",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Bitam, Province du Woleu-Ntem"
             }
         ]
     },
     {
         id: 5,
-        identificationNumber: "GA240828005",
-        firstName: "Rodrigue",
-        lastName: "KOUMBA",
-        birthPlace: "Lambaréné, Moyen-Ogooué",
-        currentStatus: "Avocat d'affaires",
+        identificationNumber: "GA220381005",
+        firstName: "André",
+        lastName: "BEKALE",
+        birthPlace: "Mouila, Ngounié",
+        currentStatus: "Professeur de mathématiques",
         parcours: [
             {
-                periode: "2020-2022",
-                etablissement: "École des Avocats",
-                ville: "Libreville",
-                niveau: "CAPA",
-                description: "Certificat d'aptitude à la profession d'avocat"
+                periode: "2015-présent",
+                etablissement: "Lycée Jean-Baptiste Obiang",
+                ville: "Lyon",
+                niveau: "Professeur certifié mathématiques",
+                description: "Enseignement classes de seconde à terminale"
             },
             {
-                periode: "2016-2020",
-                etablissement: "Faculté de Droit UOB",
-                ville: "Libreville",
-                niveau: "Master en Droit des Affaires",
-                description: "Spécialisation en droit commercial et des sociétés"
+                periode: "2013-2015",
+                etablissement: "IUFM Lyon",
+                ville: "Lyon",
+                niveau: "Master MEEF Mathématiques",
+                description: "Formation pédagogique et didactique disciplinaire"
             },
             {
-                periode: "2013-2016",
-                etablissement: "Lycée d'Oyem",
-                ville: "Oyem",
-                niveau: "Baccalauréat Série A",
-                description: "Littéraire avec option économie et gestion"
+                periode: "2010-2013",
+                etablissement: "Université Claude Bernard Lyon 1",
+                ville: "Lyon",
+                niveau: "Licence Mathématiques",
+                description: "Mathématiques pures et appliquées"
+            },
+            {
+                periode: "2007-2010",
+                etablissement: "Lycée National Omar Bongo",
+                ville: "Libreville",
+                niveau: "Baccalauréat Série C",
+                description: "Mathématiques et sciences physiques mention très bien"
+            },
+            {
+                periode: "2003-2007",
+                etablissement: "Collège de Mouila",
+                ville: "Mouila",
+                niveau: "Collège",
+                description: "Formation générale avec excellence en sciences exactes"
+            },
+            {
+                periode: "1997-2003",
+                etablissement: "École Primaire de Mouila",
+                ville: "Mouila",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention très bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital de Mouila",
+                ville: "Mouila",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Mouila, Province de la Ngounié"
             }
         ]
     },
     {
         id: 6,
-        identificationNumber: "GA241103006",
-        firstName: "Ornella",
-        lastName: "NDONG",
-        birthPlace: "Bitam, Woleu-Ntem",
-        currentStatus: "Architecte",
+        identificationNumber: "GA180999006",
+        firstName: "Christelle",
+        lastName: "NGUEMA",
+        birthPlace: "Tchibanga, Nyanga",
+        currentStatus: "Aide-soignante",
         parcours: [
             {
-                periode: "2017-2022",
-                etablissement: "École d'Architecture",
-                ville: "Libreville",
-                niveau: "Master en Architecture",
-                description: "Conception architecturale et urbanisme tropical"
+                periode: "2021-présent",
+                etablissement: "EHPAD Les Jardins",
+                ville: "Bordeaux",
+                niveau: "Aide-soignante",
+                description: "Soins d'hygiène et confort personnes âgées"
             },
             {
-                periode: "2014-2017",
-                etablissement: "Université des Sciences et Techniques",
-                ville: "Franceville",
-                niveau: "Licence en Génie Civil",
-                description: "Fondements techniques de la construction"
+                periode: "2019-2021",
+                etablissement: "Institut de Formation Aide-Soignant",
+                ville: "Bordeaux",
+                niveau: "Diplôme d'État Aide-Soignant",
+                description: "Formation théorique et stages pratiques"
             },
             {
-                periode: "2011-2014",
-                etablissement: "Lycée Technique de Lambaréné",
-                ville: "Lambaréné",
-                niveau: "Baccalauréat STI",
-                description: "Sciences et technologies industrielles"
+                periode: "2017-2019",
+                etablissement: "Hôpital de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Agent hospitalier",
+                description: "Assistance soignants et entretien locaux médicaux"
+            },
+            {
+                periode: "2015-2017",
+                etablissement: "Lycée de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Baccalauréat Série D",
+                description: "Sciences de la vie et de la terre"
+            },
+            {
+                periode: "2011-2015",
+                etablissement: "Collège de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Collège",
+                description: "Formation générale scientifique"
+            },
+            {
+                periode: "2005-2011",
+                etablissement: "École Primaire Sainte-Thérèse",
+                ville: "Tchibanga",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Régional de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Tchibanga, Province de la Nyanga"
             }
         ]
     },
     {
         id: 7,
-        identificationNumber: "GA241205007",
-        firstName: "Patrick",
-        lastName: "ONDO",
-        birthPlace: "Mouila, Ngounié",
-        currentStatus: "Professeur de mathématiques",
+        identificationNumber: "GA090286007",
+        firstName: "Rodrigue",
+        lastName: "MINTSA",
+        birthPlace: "Lambaréné, Moyen-Ogooué",
+        currentStatus: "Chauffeur de taxi",
         parcours: [
             {
-                periode: "2019-2021",
-                etablissement: "École Normale Supérieure",
-                ville: "Libreville",
-                niveau: "Master en Didactique des Mathématiques",
-                description: "Formation pédagogique approfondie"
+                periode: "2018-présent",
+                etablissement: "Taxi Indépendant",
+                ville: "Lambaréné",
+                niveau: "Chauffeur professionnel",
+                description: "Transport urbain et inter-urbain"
             },
             {
-                periode: "2015-2019",
-                etablissement: "Université Omar Bongo",
-                ville: "Libreville",
-                niveau: "Licence en Mathématiques",
-                description: "Formation théorique et appliquée en mathématiques"
+                periode: "2015-2018",
+                etablissement: "Société de Transport Ogooué",
+                ville: "Lambaréné",
+                niveau: "Chauffeur salarié",
+                description: "Transport personnel et marchandises"
             },
             {
-                periode: "2012-2015",
-                etablissement: "Lycée de Mouila",
-                ville: "Mouila",
-                niveau: "Baccalauréat Série C",
-                description: "Mathématiques et sciences physiques"
+                periode: "2014-2015",
+                etablissement: "Auto-École Lambaréné",
+                ville: "Lambaréné",
+                niveau: "Permis transport public",
+                description: "Certification conduite véhicules de transport"
+            },
+            {
+                periode: "2001-2004",
+                etablissement: "Lycée Albert Schweitzer",
+                ville: "Lambaréné",
+                niveau: "Classe de première",
+                description: "Arrêt études pour raisons familiales"
+            },
+            {
+                periode: "1997-2001",
+                etablissement: "Collège de Lambaréné",
+                ville: "Lambaréné",
+                niveau: "Collège",
+                description: "Formation générale"
+            },
+            {
+                periode: "1991-1997",
+                etablissement: "École Primaire Schweitzer",
+                ville: "Lambaréné",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Albert Schweitzer",
+                ville: "Lambaréné",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Lambaréné, Province du Moyen-Ogooué"
             }
         ]
     },
     {
         id: 8,
-        identificationNumber: "GA240607008",
+        identificationNumber: "GA140690008",
         firstName: "Sylvie",
-        lastName: "MEKAME",
-        birthPlace: "Tchibanga, Nyanga",
-        currentStatus: "Pharmacienne",
+        lastName: "BIKORO",
+        birthPlace: "Libreville, Estuaire",
+        currentStatus: "Cuisinière en restauration",
         parcours: [
             {
-                periode: "2018-2023",
-                etablissement: "Faculté de Pharmacie UOB",
+                periode: "2020-présent",
+                etablissement: "Restaurant Le Soleil d'Afrique",
+                ville: "Marseille",
+                niveau: "Chef de partie",
+                description: "Cuisine traditionnelle africaine et française"
+            },
+            {
+                periode: "2018-2020",
+                etablissement: "Brasserie du Vieux-Port",
+                ville: "Marseille",
+                niveau: "Commis de cuisine",
+                description: "Préparation plats et assistance chef cuisinier"
+            },
+            {
+                periode: "2016-2018",
+                etablissement: "Formation continue",
+                ville: "Marseille",
+                niveau: "CAP Cuisine",
+                description: "Techniques culinaires et hygiène alimentaire"
+            },
+            {
+                periode: "2008-2016",
+                etablissement: "Restaurant Chez Mama",
                 ville: "Libreville",
-                niveau: "Doctorat en Pharmacie",
-                description: "Formation complète en sciences pharmaceutiques"
+                niveau: "Cuisinière",
+                description: "Cuisine locale et plats européens"
             },
             {
-                periode: "2015-2018",
-                etablissement: "Lycée Technique de Tchibanga",
-                ville: "Tchibanga",
-                niveau: "Baccalauréat Série D",
-                description: "Sciences de la vie et chimie"
+                periode: "2006-2008",
+                etablissement: "Lycée Technique de Libreville",
+                ville: "Libreville",
+                niveau: "BEP Hôtellerie-Restauration",
+                description: "Formation hôtelière et restauration"
             },
             {
-                periode: "2012-2015",
-                etablissement: "Collège de Tchibanga",
-                ville: "Tchibanga",
+                periode: "2002-2006",
+                etablissement: "Collège Raponda-Walker",
+                ville: "Libreville",
                 niveau: "Collège",
-                description: "Formation générale avec excellence en sciences"
+                description: "Formation générale"
+            },
+            {
+                periode: "1996-2002",
+                etablissement: "École Primaire Nzeng-Ayong",
+                ville: "Libreville",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention assez bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Maternité de Libreville",
+                ville: "Libreville",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Libreville, Province de l'Estuaire"
             }
         ]
     },
     {
         id: 9,
-        identificationNumber: "GA240702009",
-        firstName: "Clément",
-        lastName: "BIBANG",
-        birthPlace: "Libreville, Estuaire",
-        currentStatus: "Économiste",
+        identificationNumber: "GA250885009",
+        firstName: "Jules",
+        lastName: "ESSONO",
+        birthPlace: "Oyem, Woleu-Ntem",
+        currentStatus: "Ingénieur forestier",
         parcours: [
             {
-                periode: "2020-2023",
-                etablissement: "Université Omar Bongo",
+                periode: "2019-présent",
+                etablissement: "Société Forestière du Gabon",
                 ville: "Libreville",
-                niveau: "Master en Droit des Affaires",
-                description: "Spécialisation en droit commercial et des sociétés"
+                niveau: "Ingénieur forestier senior",
+                description: "Gestion durable forêts et certification FSC"
             },
             {
-                periode: "2017-2020",
-                etablissement: "Lycée Immaculée Conception",
+                periode: "2016-2019",
+                etablissement: "Ministère des Eaux et Forêts",
                 ville: "Libreville",
-                niveau: "Baccalauréat Série A",
-                description: "Littéraire avec option économie ou anglais"
+                niveau: "Ingénieur forestier",
+                description: "Contrôle exploitation forestière et reboisement"
+            },
+            {
+                periode: "2010-2016",
+                etablissement: "École Nationale des Eaux et Forêts",
+                ville: "Libreville",
+                niveau: "Ingénieur des Eaux et Forêts",
+                description: "Formation sylviculture et gestion environnementale"
+            },
+            {
+                periode: "2007-2010",
+                etablissement: "Université Omar Bongo",
+                ville: "Libreville",
+                niveau: "Licence Biologie",
+                description: "Biologie végétale et écologie forestière"
+            },
+            {
+                periode: "2004-2007",
+                etablissement: "Lycée d'Oyem",
+                ville: "Oyem",
+                niveau: "Baccalauréat Série D",
+                description: "Sciences de la vie et de la terre mention bien"
+            },
+            {
+                periode: "2000-2004",
+                etablissement: "Collège d'Oyem",
+                ville: "Oyem",
+                niveau: "Collège",
+                description: "Formation générale scientifique"
+            },
+            {
+                periode: "1994-2000",
+                etablissement: "École Primaire d'Oyem",
+                ville: "Oyem",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention très bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Régional d'Oyem",
+                ville: "Oyem",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie d'Oyem, Province du Woleu-Ntem"
             }
         ]
     },
     {
         id: 10,
-        identificationNumber: "GA240819010",
-        firstName: "Estelle",
-        lastName: "MENGUE",
-        birthPlace: "Franceville, Haut-Ogooué",
-        currentStatus: "Journaliste",
+        identificationNumber: "GA110491010",
+        firstName: "Fatima",
+        lastName: "MAVOUNGOU",
+        birthPlace: "Port-Gentil, Ogooué-Maritime",
+        currentStatus: "Secrétaire administrative",
         parcours: [
             {
-                periode: "2020-2023",
-                etablissement: "Université des Sciences et Techniques",
-                ville: "Franceville",
-                niveau: "Licence LLCE Anglais",
-                description: "Langues, littératures et civilisations étrangères"
+                periode: "2017-présent",
+                etablissement: "Mairie de Toulouse",
+                ville: "Toulouse",
+                niveau: "Secrétaire administrative",
+                description: "Gestion dossiers administratifs et accueil public"
             },
             {
-                periode: "2017-2020",
-                etablissement: "Lycée Technique Omar Bongo",
-                ville: "Franceville",
-                niveau: "Baccalauréat Série A",
-                description: "Littéraire avec option anglais renforcé"
+                periode: "2015-2017",
+                etablissement: "Cabinet d'avocats Mercier & Associés",
+                ville: "Toulouse",
+                niveau: "Assistante juridique",
+                description: "Rédaction actes et suivi dossiers clients"
+            },
+            {
+                periode: "2013-2015",
+                etablissement: "École Secrétariat Médical",
+                ville: "Toulouse",
+                niveau: "BTS Assistant de Gestion",
+                description: "Gestion administrative et comptable"
+            },
+            {
+                periode: "2009-2013",
+                etablissement: "Université Omar Bongo",
+                ville: "Libreville",
+                niveau: "Licence Administration",
+                description: "Sciences administratives et gestion publique"
+            },
+            {
+                periode: "2006-2009",
+                etablissement: "Lycée Technique de Port-Gentil",
+                ville: "Port-Gentil",
+                niveau: "Baccalauréat Série G2",
+                description: "Techniques administratives et gestion"
+            },
+            {
+                periode: "2002-2006",
+                etablissement: "Collège Bessieux",
+                ville: "Port-Gentil",
+                niveau: "Collège",
+                description: "Formation générale"
+            },
+            {
+                periode: "1996-2002",
+                etablissement: "École Primaire Quartier Louis",
+                ville: "Port-Gentil",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Clinique Mandji",
+                ville: "Port-Gentil",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Port-Gentil, Province de l'Ogooué-Maritime"
             }
         ]
     },
-        {
+    {
         id: 11,
         identificationNumber: "GA240611011",
         firstName: "François",
         lastName: "ANGUE",
         birthPlace: "Port-Gentil, Ogooué-Maritime",
-        currentStatus: "Étudiant en Master",
+        currentStatus: "Data Analyst",
         parcours: [
+            {
+                periode: "2024-présent",
+                etablissement: "Microsoft Corporation",
+                ville: "New York",
+                niveau: "Data Analyst",
+                description: "Analyse données clients et intelligence business"
+            },
             {
                 periode: "2021-2024",
                 etablissement: "Université Omar Bongo",
@@ -328,10 +722,31 @@ const students = [
             },
             {
                 periode: "2018-2021",
-                etablissement: "Collège Sainte-Marie",
+                etablissement: "Lycée Technique de Port-Gentil",
                 ville: "Port-Gentil",
                 niveau: "Baccalauréat Série C",
-                description: "Mathématiques et sciences physiques"
+                description: "Mathématiques et sciences physiques mention très bien"
+            },
+            {
+                periode: "2014-2018",
+                etablissement: "Collège Sainte-Marie",
+                ville: "Port-Gentil",
+                niveau: "Collège",
+                description: "Formation générale orientation scientifique"
+            },
+            {
+                periode: "2008-2014",
+                etablissement: "École Primaire Port-Gentil Centre",
+                ville: "Port-Gentil",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention excellent"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Clinique Mandji",
+                ville: "Port-Gentil",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Port-Gentil, Province de l'Ogooué-Maritime"
             }
         ]
     },
@@ -341,21 +756,49 @@ const students = [
         firstName: "Nadine",
         lastName: "OGANDAGA",
         birthPlace: "Oyem, Woleu-Ntem",
-        currentStatus: "Infirmier",
+        currentStatus: "Sage-femme",
         parcours: [
             {
+                periode: "2024-présent",
+                etablissement: "Hôpital Mohammed V",
+                ville: "Rabat",
+                niveau: "Sage-femme",
+                description: "Suivi grossesses et accouchements"
+            },
+            {
                 periode: "2020-2023",
-                etablissement: "CHU de Libreville",
-                ville: "Libreville",
-                niveau: "Licence en Sciences Infirmières",
-                description: "Formation en soins infirmiers et gestion hospitalière"
+                etablissement: "Institut Supérieur des Sciences de la Santé",
+                ville: "Casablanca",
+                niveau: "Diplôme de Sage-femme",
+                description: "Formation obstétrique et néonatologie"
             },
             {
                 periode: "2017-2020",
                 etablissement: "Lycée d'Oyem",
                 ville: "Oyem",
                 niveau: "Baccalauréat Série D",
-                description: "Sciences de la vie et de la terre"
+                description: "Sciences de la vie et de la terre mention bien"
+            },
+            {
+                periode: "2013-2017",
+                etablissement: "Collège d'Oyem",
+                ville: "Oyem",
+                niveau: "Collège",
+                description: "Formation générale scientifique"
+            },
+            {
+                periode: "2007-2013",
+                etablissement: "École Primaire d'Oyem",
+                ville: "Oyem",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Régional d'Oyem",
+                ville: "Oyem",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie d'Oyem, Province du Woleu-Ntem"
             }
         ]
     },
@@ -365,21 +808,56 @@ const students = [
         firstName: "Alain",
         lastName: "MBOUMBA",
         birthPlace: "Lambaréné, Moyen-Ogooué",
-        currentStatus: "Chercheur",
+        currentStatus: "Ingénieur BTP",
         parcours: [
+            {
+                periode: "2023-présent",
+                etablissement: "Entreprise Générale du Sénégal",
+                ville: "Dakar",
+                niveau: "Ingénieur travaux publics",
+                description: "Supervision chantiers infrastructures routières"
+            },
             {
                 periode: "2021-2024",
                 etablissement: "Université des Sciences et Techniques",
                 ville: "Franceville",
                 niveau: "Master en Génie Civil",
-                description: "Fondements techniques de la construction"
+                description: "Spécialisation infrastructures et bâtiments"
             },
             {
                 periode: "2018-2021",
+                etablissement: "Université des Sciences et Techniques",
+                ville: "Franceville",
+                niveau: "Licence Génie Civil",
+                description: "Fondements techniques de la construction"
+            },
+            {
+                periode: "2015-2018",
                 etablissement: "Lycée Technique de Lambaréné",
                 ville: "Lambaréné",
                 niveau: "Baccalauréat STI",
-                description: "Sciences et technologies industrielles"
+                description: "Sciences et technologies industrielles mention assez bien"
+            },
+            {
+                periode: "2011-2015",
+                etablissement: "Collège de Lambaréné",
+                ville: "Lambaréné",
+                niveau: "Collège",
+                description: "Formation générale technique"
+            },
+            {
+                periode: "2005-2011",
+                etablissement: "École Primaire Schweitzer",
+                ville: "Lambaréné",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention assez bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Albert Schweitzer",
+                ville: "Lambaréné",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Lambaréné, Province du Moyen-Ogooué"
             }
         ]
     },
@@ -389,21 +867,56 @@ const students = [
         firstName: "Léa",
         lastName: "NTSAME",
         birthPlace: "Mouila, Ngounié",
-        currentStatus: "Professeure",
+        currentStatus: "Professeure de français",
         parcours: [
+            {
+                periode: "2024-présent",
+                etablissement: "Lycée Blaise Diagne",
+                ville: "Dakar",
+                niveau: "Professeure certifiée français",
+                description: "Enseignement littérature française et africaine"
+            },
             {
                 periode: "2020-2023",
                 etablissement: "École Normale Supérieure",
                 ville: "Libreville",
-                niveau: "Master en Didactique",
-                description: "Spécialisation en enseignement"
+                niveau: "Master en Lettres Modernes",
+                description: "Spécialisation littérature francophone"
             },
             {
                 periode: "2017-2020",
+                etablissement: "Université Omar Bongo",
+                ville: "Libreville",
+                niveau: "Licence Lettres Modernes",
+                description: "Littérature française et linguistique"
+            },
+            {
+                periode: "2014-2017",
                 etablissement: "Lycée de Mouila",
                 ville: "Mouila",
                 niveau: "Baccalauréat Série A",
-                description: "Littéraire avec option anglais renforcé"
+                description: "Littéraire avec option anglais renforcé mention bien"
+            },
+            {
+                periode: "2010-2014",
+                etablissement: "Collège de Mouila",
+                ville: "Mouila",
+                niveau: "Collège",
+                description: "Formation générale littéraire"
+            },
+            {
+                periode: "2004-2010",
+                etablissement: "École Primaire de Mouila",
+                ville: "Mouila",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention très bien"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital de Mouila",
+                ville: "Mouila",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Mouila, Province de la Ngounié"
             }
         ]
     },
@@ -413,8 +926,15 @@ const students = [
         firstName: "Thierry",
         lastName: "EDOU",
         birthPlace: "Tchibanga, Nyanga",
-        currentStatus: "Pharmacien",
+        currentStatus: "Pharmacien clinicien",
         parcours: [
+            {
+                periode: "2024-présent",
+                etablissement: "Hôpital Général de Montréal",
+                ville: "Montréal",
+                niveau: "Pharmacien clinicien",
+                description: "Pharmacie hospitalière et conseil thérapeutique"
+            },
             {
                 periode: "2019-2024",
                 etablissement: "Faculté de Pharmacie UOB",
@@ -424,10 +944,31 @@ const students = [
             },
             {
                 periode: "2016-2019",
-                etablissement: "Collège de Tchibanga",
+                etablissement: "Lycée de Tchibanga",
                 ville: "Tchibanga",
                 niveau: "Baccalauréat Série D",
-                description: "Sciences de la vie et chimie"
+                description: "Sciences de la vie et chimie mention très bien"
+            },
+            {
+                periode: "2012-2016",
+                etablissement: "Collège de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Collège",
+                description: "Formation générale scientifique"
+            },
+            {
+                periode: "2006-2012",
+                etablissement: "École Primaire Sainte-Thérèse",
+                ville: "Tchibanga",
+                niveau: "Primaire",
+                description: "Certificat d'études primaires mention excellent"
+            },
+            {
+                periode: "Naissance",
+                etablissement: "Hôpital Régional de Tchibanga",
+                ville: "Tchibanga",
+                niveau: "Naissance",
+                description: "Déclaration à la Mairie de Tchibanga, Province de la Nyanga"
             }
         ]
     },
